@@ -40,6 +40,16 @@ When("user clicks the login button", async function () {
 Then("user login succussfully to the homepage", async function () {
   // verify the title is Library
   await expect(PageManager.page).toHaveTitle("Library");
-  
-  // await BrowserUtility.sleep(2);
+  });
+
+When('user enters invalid username {string}', async function (string) {
+  await PageManager.loginPage.enterUsername(string);
+});
+
+When('user enters invalid password {string}', async function (string) {
+  await PageManager.loginPage.enterPassword(string);
+});
+
+Then('users should see a {string} error pop-up message', async function (string) {
+  await expect(PageManager.loginPage.loginErrorMessage).toHaveText(string);
 });
